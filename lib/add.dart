@@ -1,5 +1,7 @@
+import 'package:coba/url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 
 class AddData extends StatefulWidget {
@@ -21,8 +23,18 @@ class _AddDataState extends State<AddData> {
     super.dispose();
   }
 
+  final spinkit = SpinKitFadingCircle(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          color: index.isEven ? Colors.red : Colors.green,
+        ),
+      );
+    },
+  );
+
   Future addData() async {
-    final _url = Uri.parse('http://192.168.43.39/php/db/create.php');
+    final _url = Uri.parse(Url.add);
     var request = http.MultipartRequest('POST', _url);
     request.fields.addAll({"nama": getNama.text, "umur": getUmur.text});
     EasyLoading.show(status: 'Loading...');

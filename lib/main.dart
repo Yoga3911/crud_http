@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:coba/add.dart';
 import 'package:coba/detail.dart';
 import 'package:coba/parse.dart';
+import 'package:coba/url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -87,7 +88,7 @@ class Produk extends StatefulWidget {
 }
 
 class _ProdukState extends State<Produk> {
-  final _url = Uri.parse('http://192.168.43.39/php/db/read.php');
+  final _url = Uri.parse(Url.get);
   Future<List<Welcome>> getData() async {
     final response = await http.get(_url);
     return welcomeFromJson(response.body);

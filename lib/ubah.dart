@@ -1,4 +1,6 @@
+import 'package:coba/main.dart';
 import 'package:coba/parse.dart';
+import 'package:coba/url.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,7 +31,7 @@ class _UbahDataState extends State<UbahData> {
   }
 
   void ubahData() {
-    final _url = Uri.parse('http://192.168.43.39/php/db/update.php');
+    final _url = Uri.parse(Url.update);
     http.post(_url, body: {"nama": getNama.text, "umur": getUmur.text});
   }
 
@@ -61,7 +63,10 @@ class _UbahDataState extends State<UbahData> {
             ElevatedButton(
                 onPressed: () {
                   ubahData();
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Produk()),
+                      ModalRoute.withName('/'));
                 },
                 child: const Text('Ubah'))
           ],
